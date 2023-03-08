@@ -1,6 +1,3 @@
-
-CREATE schema monster_compendium_api;
-
 CREATE TABLE monster_compendium_api.template
 (
  "id"   bigserial NOT NULL,
