@@ -24,10 +24,11 @@ public class Template {
 
     private String name;
 
-    @OneToMany(mappedBy = "template")
+    @OneToMany(mappedBy = "template", cascade = CascadeType.ALL)
     private List<Field> fields;
 
-
+    @Column(name = "showactivefields")
+    private Boolean showDisabledFields;
 
 
 }

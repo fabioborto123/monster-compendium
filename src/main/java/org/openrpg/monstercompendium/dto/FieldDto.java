@@ -17,5 +17,7 @@ public class FieldDto {
 
     private String name;
 
+    private Boolean active;
+
 
 }

@@ -1,6 +1,7 @@
 package org.openrpg.monstercompendium.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.openrpg.monstercompendium.dto.TemplateDto;
 import org.openrpg.monstercompendium.entity.Template;
 
@@ -8,8 +9,8 @@ import org.openrpg.monstercompendium.entity.Template;
 @Mapper(componentModel = "spring")
 public interface TemplateMapper {
 
-     Template toEntity(TemplateDto templateDto);
 
+     Template toEntity(TemplateDto templateDto);
 
      TemplateDto toDto(Template template);
 

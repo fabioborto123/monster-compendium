@@ -22,10 +22,9 @@ public class Field {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger id;
     private String name;
+    private Boolean active;
     @ManyToOne
     @JoinColumn(name = "template_id")
     private Template template;
-
-
 
 }

@@ -16,6 +16,7 @@ public class TemplateDto {
 
     private BigInteger id;
     private String name;
-
+    private Boolean showDisabledFields;
     private List<FieldDto> fields;
+
 }
