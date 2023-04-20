@@ -1,24 +1,30 @@
 package org.openrpg.monstercompendium.service;
 
-import org.aspectj.apache.bcel.generic.InstructionList;
-import org.aspectj.apache.bcel.generic.ObjectType;
+import jakarta.transaction.Transactional;
 import org.openrpg.monstercompendium.entity.Field;
+import org.openrpg.monstercompendium.entity.MonsterField;
 import org.openrpg.monstercompendium.entity.Template;
 import org.openrpg.monstercompendium.repository.FieldRepository;
+import org.openrpg.monstercompendium.repository.MonsterFieldRepository;
 import org.openrpg.monstercompendium.repository.TemplateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class TemplateService {
 
     @Autowired
+    private MonsterFieldRepository monsterFieldRepository;
+
+    @Autowired
     private TemplateRepository templateRepository;
-    private FieldRepository fieldRepository;
+
+    @Autowired FieldRepository fieldRepository;
 
     public Template save(Template template) {
         List<Field> templateFields = template.getFields();
@@ -45,24 +51,33 @@ public class TemplateService {
     }
 
 
-    public void deleteById(Field field) {
-    }
-
-
     public void update(BigInteger id, Template newTemplate) {
         Template savedTemplate = templateRepository.getReferenceById(id);
+        savedTemplate.getFields().forEach(savedField -> savedField.setActive(false));
 
-        for (Field savedField: savedTemplate.getFields()){
-            savedField.setActive(false);
-        }
-        for (Field newField: newTemplate.getFields()){
-            newField.setTemplate(savedTemplate);
-            newField.setActive(true);
+        for (Field newField: newTemplate.getFields()) {
+            if (newField.getId() == null) {
+                savedTemplate.getFields().add(newField);
+                newField.setTemplate(savedTemplate);
+                newField.setActive(true);
+            } else
+                savedTemplate.getFields().stream()
+                        .filter(savedField -> savedField.getId().equals(newField.getId()))
+                        .forEach(savedField -> {
+                            savedField.setActive(true);
+                            savedField.setName(newField.getName());
+                        });
         }
         savedTemplate.setName(newTemplate.getName());
-        savedTemplate.setFields(newTemplate.getFields());
+        savedTemplate.setFields(savedTemplate.getFields());
         savedTemplate.setShowDisabledFields(newTemplate.getShowDisabledFields());
+
+        savedTemplate.getFields().stream()
+                .filter(field -> !field.getActive())
+                .forEach(field -> monsterFieldRepository.deleteByFieldId(field.getId()));
+
         templateRepository.save(savedTemplate);
     }
+
 }
 

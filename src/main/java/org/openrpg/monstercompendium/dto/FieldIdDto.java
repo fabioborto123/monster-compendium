@@ -6,18 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigInteger;
-import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TemplateDto {
-
+public class FieldIdDto {
     private BigInteger id;
-    private Boolean showDisabledFields;
     private String name;
-    private List<FieldDto> fields;
-
-
 }

@@ -15,8 +15,10 @@ import java.math.BigInteger;
 @RequestMapping("/fields")
 public class FieldController {
 
+    @Autowired
     private FieldMapper fieldMapper;
 
+    @Autowired
     private FieldService fieldService;
 
     }

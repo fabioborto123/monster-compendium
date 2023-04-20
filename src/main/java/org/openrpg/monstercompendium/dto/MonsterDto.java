@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.mapstruct.Mapping;
+import org.openrpg.monstercompendium.entity.Template;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -12,12 +14,14 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TemplateDto {
+public class MonsterDto {
 
     private BigInteger id;
-    private Boolean showDisabledFields;
-    private String name;
-    private List<FieldDto> fields;
 
+    private String name;
+
+    private BigInteger templateId;
+
+    private List<MonsterFieldDto> monsterFields;
 
 }

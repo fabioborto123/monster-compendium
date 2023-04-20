@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigInteger;
+import java.util.List;
 
 @Entity
 @Table(schema = "monster_compendium_api")
@@ -26,5 +27,4 @@ public class Field {
     @ManyToOne
     @JoinColumn(name = "template_id")
     private Template template;
-
 }

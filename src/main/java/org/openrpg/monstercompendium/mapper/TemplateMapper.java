@@ -1,7 +1,6 @@
 package org.openrpg.monstercompendium.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.openrpg.monstercompendium.dto.TemplateDto;
 import org.openrpg.monstercompendium.entity.Template;
 

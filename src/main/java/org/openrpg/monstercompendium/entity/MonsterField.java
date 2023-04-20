@@ -13,7 +13,7 @@ import java.math.BigInteger;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(schema = "monster_compendium_api")
+@Table(name = "monster_field",schema = "monster_compendium_api")
 
 public class MonsterField {
 
@@ -23,12 +23,13 @@ public class MonsterField {
 
     private String value;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "monster_id")
     private Monster monster;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "field_id")
     private Field field;
+
 
 }

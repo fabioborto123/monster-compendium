@@ -27,10 +27,7 @@ public class Monster {
     @JoinColumn(name = "template_id")
     private Template template;
 
-    @OneToMany(mappedBy = "monster")
+    @OneToMany(mappedBy = "monster", orphanRemoval = true)
     private List<MonsterField> monsterFields;
-
-
-
 
 }
